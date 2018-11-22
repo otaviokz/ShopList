@@ -26,7 +26,7 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     let databasePort: Int
     
     if (env == .testing) {
-        databaseName = "vapor-test"
+        databaseName = "vapor_shoplist_test"
         databasePort = 5433
     } else {
         databaseName = Environment.get("DATABASE_DB") ?? "vapor_shoplist"
@@ -52,9 +52,9 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     services.register(migrations)
 
     // Adding Fluent commands to wipe out database
-//    var commandConfig = CommandConfig.default()
-//    commandConfig.useFluentCommands()
-//    services.register(commandConfig)
+    var commandConfig = CommandConfig.default()
+    commandConfig.useFluentCommands()
+    services.register(commandConfig)
     
     config.prefer(LeafRenderer.self, for: ViewRenderer.self)
     config.prefer(MemoryKeyedCache.self, for: KeyedCache.self)
