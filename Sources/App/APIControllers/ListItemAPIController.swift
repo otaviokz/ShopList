@@ -24,7 +24,7 @@ struct ListItemsAPIController: RouteCollection {
 
 private extension ListItemsAPIController {
     func getAllHandler(req: Request) throws -> Future<[ListItem]> {
-        return ListItem.query(on: req).all()
+        return ListItem.query(on: req).sort(\.description, .ascending).all()
     }
     
     func createHandler(req: Request, data: ListItemCreateData) throws -> Future<ListItem> {

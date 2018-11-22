@@ -40,9 +40,8 @@ class ListItemTests: XCTestCase {
     
     func testCanDelete() throws {
         let retrievedItems = try app.getResponse(to: listItemsURI, decodeTo: [ListItem].self)
-        let first = retrievedItems[0]
         
-        try app!.sendBodylessRequest(to: "\(listItemsURI)/\(first.id!)", method: .DELETE)
+        try app.sendBodylessRequest(to: "\(listItemsURI)/\(retrievedItems[0].id!)", method: .DELETE)
         
         let newRetrievedItems = try app.getResponse(to: listItemsURI, decodeTo: [ListItem].self)
         XCTAssertEqual(newRetrievedItems.count, 7)
