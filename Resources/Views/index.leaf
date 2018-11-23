@@ -14,13 +14,9 @@
           <td>
             <form method="post" action="/additem">
               <div class="form-group">
-                <input type="text" name="description" class="form-control" id="description" style="max-width: 250px; float: left;"/>
+                <input type="text" placeholder="Ari sua linda!" name="description" class="form-control" id="description" style="max-width: 250px; float: left;"/>
                 <input class="btn btn-primary" type="submit" value="Add" style="float: right;"/>
               </div>
-
-              <!-- <button type="submit" class="btn btn-primary" style="float: right;">
-                Add
-              </button> -->
             </form>
           </td>
 
