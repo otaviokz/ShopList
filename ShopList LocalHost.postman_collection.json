@@ -96,6 +96,32 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Add To List",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/api/listitems/25/lists/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"listitems",
+								"25",
+								"lists",
+								"2"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},

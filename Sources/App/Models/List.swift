@@ -15,9 +15,15 @@ final class List: Codable {
     init(name: String) {
         self.name = name
     }
+    
+    var items: Siblings<List, ListItem, ListListItemPivot> {
+        return siblings()
+    }
 }
 
 extension List: Migration { }
 extension List: PostgreSQLModel { }
 extension List: Content { }
 extension List: Parameter { }
+
+

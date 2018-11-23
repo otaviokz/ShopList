@@ -16,6 +16,7 @@ struct ListItemsAPIController: RouteCollection {
         
         listItemsRoutes.get(use: getAllHandler)
         listItemsRoutes.post(ListItemCreateData.self, use: createHandler)
+        listItemsRoutes.post(ListItem.parameter, "lists", List.parameter, use: addToList)
         listItemsRoutes.delete(ListItem.parameter, use: deleteHandler)
     }
 }
@@ -30,6 +31,14 @@ private extension ListItemsAPIController {
     func createHandler(req: Request, data: ListItemCreateData) throws -> Future<ListItem> {
         let item = ListItem(description: data.description)
         return item.save(on: req)
+    }
+    
+    func addToList(req: Request) throws -> Future<HTTPStatus> {
+        return try flatMap(to: HTTPStatus.self,
+                           req.parameters.next(ListItem.self),
+                           req.parameters.next(List.self)) { item, list in
+                            return list.items.attach(item, on: req).transform(to: .created)
+        }
     }
     
     func deleteHandler(req: Request) throws -> Future<HTTPStatus> {
