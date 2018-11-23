@@ -2,20 +2,12 @@ import Vapor
 
 /// Register your application's routes here.
 public func routes(_ router: Router) throws {
-    // Basic "It works" example
-    router.get { req in
-        return "It works!"
-    }
-    
-    // Basic "Hello, world!" example
-    router.get("hello") { req in
-        return "Hello, world!"
-    }
-
     // API
     try router.register(collection: ListItemsAPIController.shared)
+    try router.register(collection: ListAPIController.shared)
     
     // Website
     try router.register(collection: IndexWebsiteController.shared)
     try router.register(collection: ListItemWebsiteController.shared)
+    try router.register(collection: ListWebsiteController.shared)
 }

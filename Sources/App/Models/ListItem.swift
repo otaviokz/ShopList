@@ -17,20 +17,7 @@ final class ListItem: Codable {
     }
 }
 
-extension ListItem: Migration {
-//    typealias Database = PostgreSQLDatabase
-//    
-//    static func prepare(on connection: PostgreSQLConnection) -> Future<Void> {
-//        return Database.create(self, on: connection) { builder in
-//            try addProperties(to: builder)
-//        }
-//    }
-//    
-//    static func revert(on connection: PostgreSQLConnection) -> Future<Void> {
-//        return .done(on: connection)
-//    }
-}
-
+extension ListItem: Migration { }
 extension ListItem: PostgreSQLModel { }
 extension ListItem: Content { }
 extension ListItem: Parameter { }

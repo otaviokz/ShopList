@@ -28,8 +28,8 @@
         <li class="nav-item #if(title == "Shop List"){active}">
           <a href="/" class="nav-link">Shop List</a>
         </li>
-        <li class="nav-item #if(title == "Add Item"){active}">
-          <a href="/additem" class="nav-link">Add Item</a>
+        <li class="nav-item #if(title == "Your Lists"){active}">
+          <a href="/lists" class="nav-link">Your Lists</a>
         </li>
       </ul>
     </div>

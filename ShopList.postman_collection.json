@@ -6,89 +6,207 @@
 	},
 	"item": [
 		{
-			"name": "Remove",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "https://otaviokz-shoplist-prod.vapor.cloud/api/listitems/2",
-					"protocol": "https",
-					"host": [
-						"otaviokz-shoplist-prod",
-						"vapor",
-						"cloud"
-					],
-					"path": [
-						"api",
-						"listitems",
-						"2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "All",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "https://otaviokz-shoplist-prod.vapor.cloud/api/listitems",
-					"protocol": "https",
-					"host": [
-						"otaviokz-shoplist-prod",
-						"vapor",
-						"cloud"
-					],
-					"path": [
-						"api",
-						"listitems"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Create",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "description",
-							"value": "bread",
-							"type": "text"
+			"name": "Items",
+			"item": [
+				{
+					"name": "All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://otaviokz-shoplist-prod.vapor.cloud/api/listitems",
+							"protocol": "https",
+							"host": [
+								"otaviokz-shoplist-prod",
+								"vapor",
+								"cloud"
+							],
+							"path": [
+								"api",
+								"listitems"
+							]
 						}
-					]
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "https://otaviokz-shoplist-prod.vapor.cloud/api/listitems",
-					"protocol": "https",
-					"host": [
-						"otaviokz-shoplist-prod",
-						"vapor",
-						"cloud"
-					],
-					"path": [
-						"api",
-						"listitems"
-					]
+				{
+					"name": "Remove",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://otaviokz-shoplist-prod.vapor.cloud/api/listitems/2",
+							"protocol": "https",
+							"host": [
+								"otaviokz-shoplist-prod",
+								"vapor",
+								"cloud"
+							],
+							"path": [
+								"api",
+								"listitems",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "description",
+									"value": "bread",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://otaviokz-shoplist-prod.vapor.cloud/api/listitems",
+							"protocol": "https",
+							"host": [
+								"otaviokz-shoplist-prod",
+								"vapor",
+								"cloud"
+							],
+							"path": [
+								"api",
+								"listitems"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
+		},
+		{
+			"name": "List",
+			"item": [
+				{
+					"name": "ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://otaviokz-shoplist-prod.vapor.cloud/api/lists/2",
+							"protocol": "https",
+							"host": [
+								"otaviokz-shoplist-prod",
+								"vapor",
+								"cloud"
+							],
+							"path": [
+								"api",
+								"lists",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://otaviokz-shoplist-prod.vapor.cloud/api/lists",
+							"protocol": "https",
+							"host": [
+								"otaviokz-shoplist-prod",
+								"vapor",
+								"cloud"
+							],
+							"path": [
+								"api",
+								"lists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Gifts",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://otaviokz-shoplist-prod.vapor.cloud/api/lists",
+							"protocol": "https",
+							"host": [
+								"otaviokz-shoplist-prod",
+								"vapor",
+								"cloud"
+							],
+							"path": [
+								"api",
+								"lists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://otaviokz-shoplist-prod.vapor.cloud/api/lists/1",
+							"protocol": "https",
+							"host": [
+								"otaviokz-shoplist-prod",
+								"vapor",
+								"cloud"
+							],
+							"path": [
+								"api",
+								"lists",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
