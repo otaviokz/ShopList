@@ -19,7 +19,7 @@ struct IndexWebsiteController: RouteCollection {
 
 private extension IndexWebsiteController {
     func indexHandler(req: Request) throws -> Future<View> {
-        return ListItem.query(on: req).sort(\.description, .ascending).all().flatMap(to: View.self) { items in
+        return Item.query(on: req).sort(\.description, .ascending).all().flatMap(to: View.self) { items in
             return try req.view().render("index.leaf", IndexContext(items: items))
         }
     }
@@ -27,5 +27,5 @@ private extension IndexWebsiteController {
 
 struct IndexContext: Encodable {
     let title = "Shop List"
-    let items: [ListItem]?
+    let items: [Item]?
 }

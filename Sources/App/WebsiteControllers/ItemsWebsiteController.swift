@@ -1,5 +1,5 @@
 //
-//  ListItemWebsiteController.swift
+//  ItemWebsiteController.swift
 //  App
 //
 //  Created by Otávio Zabaleta on 22/11/2018.
@@ -9,19 +9,19 @@ import Vapor
 import Leaf
 import Fluent
 
-struct ListItemWebsiteController: RouteCollection {
-    static let shared = ListItemWebsiteController()
+struct ItemsWebsiteController: RouteCollection {
+    static let shared = ItemsWebsiteController()
     
     func boot(router: Router) throws {
-        router.post("listitems", ListItem.parameter, "delete", use: deleteItemHandler)
+        router.post("items", Item.parameter, "delete", use: deleteItemHandler)
         router.get("additem", use: addHandler)
         router.post(ItemAddData.self, at: "additem", use: addPostHandler)
     }
 }
 
-private extension ListItemWebsiteController {
+private extension ItemsWebsiteController {
     func deleteItemHandler(req: Request) throws -> Future<Response> {
-        return try req.parameters.next(ListItem.self).delete(on: req).transform(to: req.redirect(to: "/"))
+        return try req.parameters.next(Item.self).delete(on: req).transform(to: req.redirect(to: "/"))
     }
     
     func addHandler(req: Request) throws -> Future<View> {
@@ -36,7 +36,7 @@ private extension ListItemWebsiteController {
             print("Error saving data")
         }
         
-        let item = ListItem(description: data.description)
+        let item = Item(description: data.description)
         return item.save(on: req).map(to: Response.self) { item in
             return req.redirect(to: "/")
         }

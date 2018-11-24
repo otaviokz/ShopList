@@ -8,9 +8,9 @@
 @testable import App
 import FluentPostgreSQL
 
-extension ListItem {
-    static func create(descriprion: String, on conn: PostgreSQLConnection) throws -> ListItem {
-        let item = ListItem(description: descriprion)
+extension Item {
+    static func create(descriprion: String, on conn: PostgreSQLConnection) throws -> Item {
+        let item = Item(description: descriprion)
         return try item.save(on: conn).wait()
     }
 }

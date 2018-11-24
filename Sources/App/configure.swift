@@ -49,8 +49,8 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     /// Configure migrations
     var migrations = MigrationConfig()
     migrations.add(model: List.self, database: .psql)
-    migrations.add(model: ListItem.self, database: .psql)
-    migrations.add(model: ListListItemPivot.self, database: .psql)
+    migrations.add(model: Item.self, database: .psql)
+    migrations.add(model: ListItemPivot.self, database: .psql)
     services.register(migrations)
 
     // Adding Fluent commands to wipe out database

@@ -9,8 +9,8 @@ import Vapor
 import Leaf
 import Fluent
 
-struct ListWebsiteController: RouteCollection {
-    static let shared = ListWebsiteController()
+struct ListsWebsiteController: RouteCollection {
+    static let shared = ListsWebsiteController()
     
     func boot(router: Router) throws {
         router.get("lists", use: listsHandler)
@@ -19,7 +19,7 @@ struct ListWebsiteController: RouteCollection {
     }
 }
 
-private extension ListWebsiteController {
+private extension ListsWebsiteController {
     func listsHandler(req: Request) throws -> Future<View> {
         return List.query(on: req).sort(\.name, .ascending).all().flatMap(to: View.self) {
             items in

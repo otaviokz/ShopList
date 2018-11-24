@@ -26,7 +26,7 @@
             <tr>
               <td>
                   <h5 style="float: left;">#(item.description)</h5>
-                  <form method="post" action="/listitems/#(item.id)/delete" >
+                  <form method="post" action="/items/#(item.id)/delete" >
                       <input class="btn btn-danger" type="submit" value="Delete" style="float: right;"/>
                   </form>
               </td>

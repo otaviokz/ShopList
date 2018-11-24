@@ -16,7 +16,7 @@ final class List: Codable {
         self.name = name
     }
     
-    var items: Siblings<List, ListItem, ListListItemPivot> {
+    var items: Siblings<List, Item, ListItemPivot> {
         return siblings()
     }
 }

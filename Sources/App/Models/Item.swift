@@ -1,5 +1,5 @@
 //
-//  ListItem.swift
+//  Item.swift
 //  App
 //
 //  Created by Otávio Zabaleta on 22/11/2018.
@@ -8,7 +8,7 @@
 import Vapor
 import FluentPostgreSQL
 
-final class ListItem: Codable {
+final class Item: Codable {
     var id: Int?
     var description: String
     
@@ -17,7 +17,7 @@ final class ListItem: Codable {
     }
 }
 
-extension ListItem: Migration { }
-extension ListItem: PostgreSQLModel { }
-extension ListItem: Content { }
-extension ListItem: Parameter { }
+extension Item: Migration { }
+extension Item: PostgreSQLModel { }
+extension Item: Content { }
+extension Item: Parameter { }

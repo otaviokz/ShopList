@@ -8,21 +8,21 @@
 import Vapor
 import Fluent
 
-struct ListAPIController: RouteCollection {
-    static let shared = ListAPIController()
+struct ListsAPIController: RouteCollection {
+    static let shared = ListsAPIController()
     
     func boot(router: Router) throws {
         let listRoutes = router.grouped("api", "lists")
         listRoutes.get(List.parameter, use: getHandler)
         listRoutes.get(use: getAllHandler)
-        listRoutes.post(CreateListData.self, use: createHandler)
+        listRoutes.post(ListCreateData.self, use: createHandler)
         listRoutes.delete(List.parameter, use: deleteHandler)
     }
 }
 
 // MARK: - Handlers
 
-private extension ListAPIController {
+private extension ListsAPIController {
     
     // MARK: - GET
     
@@ -36,7 +36,7 @@ private extension ListAPIController {
     
     // MARK: - POST
     
-    func createHandler(req: Request, data: CreateListData) throws -> Future<List> {
+    func createHandler(req: Request, data: ListCreateData) throws -> Future<List> {
         return List(name: data.name).save(on: req)
     }
     
@@ -47,6 +47,6 @@ private extension ListAPIController {
     }
 }
 
-struct CreateListData: Content {
+struct ListCreateData: Content {
     let name: String
 }

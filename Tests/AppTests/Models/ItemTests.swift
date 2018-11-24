@@ -10,9 +10,9 @@ import Vapor
 import FluentPostgreSQL
 import XCTest
 
-class ListItemTests: XCTestCase {
-    let items = ["bread", "potatoes", "eggs", "minced meat", "butter", "vegetables", "watermelon", "napkins"]
-    let listItemsURI = "/api/listitems"
+class ItemTests: XCTestCase {
+    let items = ["bread", "butter", "eggs", "minced meat", "napkins", "potatoes", "vegetables", "watermelon"]
+    let listItemsURI = "/api/items"
     var app: Application!
     var conn: PostgreSQLConnection!
     
@@ -22,7 +22,7 @@ class ListItemTests: XCTestCase {
         conn = try! app.newConnection(to: .psql).wait()
         
         for description in items {
-            _ = try! ListItem.create(descriprion: description, on: conn)
+            _ = try! Item.create(descriprion: description, on: conn)
         }
     }
     
@@ -31,7 +31,7 @@ class ListItemTests: XCTestCase {
     }
     
     func testCanRetrieve() throws {
-        let retrievedItems = try app.getResponse(to: listItemsURI, decodeTo: [ListItem].self)
+        let retrievedItems = try app.getResponse(to: listItemsURI, decodeTo: [Item].self)
         
         XCTAssertEqual(retrievedItems.count, 8)
         XCTAssertEqual(retrievedItems[0].description, items[0])
@@ -39,11 +39,11 @@ class ListItemTests: XCTestCase {
     }
     
     func testCanDelete() throws {
-        let retrievedItems = try app.getResponse(to: listItemsURI, decodeTo: [ListItem].self)
+        let retrievedItems = try app.getResponse(to: listItemsURI, decodeTo: [Item].self)
         
         try app.sendBodylessRequest(to: "\(listItemsURI)/\(retrievedItems[0].id!)", method: .DELETE)
         
-        let newRetrievedItems = try app.getResponse(to: listItemsURI, decodeTo: [ListItem].self)
+        let newRetrievedItems = try app.getResponse(to: listItemsURI, decodeTo: [Item].self)
         XCTAssertEqual(newRetrievedItems.count, 7)
     }
 }
