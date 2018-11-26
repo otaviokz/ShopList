@@ -56,31 +56,7 @@ private extension ListsAPIController {
     
     // MARK: - DELETE
     
-    
-//
-//    func deleteItemsHandler(req: Request) throws -> Future<HTTPStatus> {
-//        let listID = try req.parameters.next(Int.self)
-//        List.find(listID, on: req).flatMap { (maybeList: List) in
-//            guard let list = maybeList else {
-//                return try req.parameters.next(List.self).delete(on: req).transform(to: HTTPStatus.noContent)
-//            }
-//            return try list.delete(on: req).transform(to: HTTPStatus.noContent)
-//        }
-//
-//    }
-    
     func deleteHandler(req: Request) throws -> Future<HTTPStatus> {
-//        return try req.parameters.next(List.self).map(to: HTTPStatus) { list in
-//            return try list.delete(on: req).transform(to: HTTPStatus.noContent)
-//            getItems(listID: list.id!, req: req).map(to: Item) { items in
-//                if items.count > 0 {
-//                    throw Abort(.badRequest)
-//                }
-//
-//
-//            }
-//        }
-        
         return try req.parameters.next(List.self).delete(on: req).transform(to: HTTPStatus.noContent)
     }
 }
