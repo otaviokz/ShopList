@@ -22,7 +22,7 @@ private extension IndexWebsiteController {
         return List.query(on: req).filter(\.name == "Shop List").first().flatMap(to: View.self) { maybeList in
             guard let list = maybeList, let listID = list.id else {
                 return List(name: "Shop List").save(on: req).flatMap(to: View.self) { list in
-                    return try req.view().render("singlelist.leaf", IndexContext(title: list.name, listID: list.id!, items: nil))
+                    return try req.view().render("singlelist.leaf", IndexContext(title: list.name, listID: list.requireID(), items: nil))
                 }
             }
             
