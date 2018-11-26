@@ -25,7 +25,17 @@ extension Item {
     }
 }
 
-extension Item: Migration { }
+extension Item: Migration {
+    typealias Database = PostgreSQLDatabase
+    static func prepare(on connection: PostgreSQLConnection) -> Future<Void> {
+        return Database.create(self, on: connection) { builder in
+            // Add original columns to the User table using User’s properties.
+            builder.field(for: \.id, isIdentifier: true)
+            builder.field(for: \.description)
+            builder.field(for: \.listID)
+        }
+    }
+}
 extension Item: PostgreSQLModel { }
 extension Item: Content { }
 extension Item: Parameter { }
