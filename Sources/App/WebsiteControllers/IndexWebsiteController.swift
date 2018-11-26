@@ -19,13 +19,22 @@ struct IndexWebsiteController: RouteCollection {
 
 private extension IndexWebsiteController {
     func indexHandler(req: Request) throws -> Future<View> {
-        return Item.query(on: req).sort(\.description, .ascending).all().flatMap(to: View.self) { items in
-            return try req.view().render("index.leaf", IndexContext(items: items))
+        return List.query(on: req).filter(\.name == "Shop List").first().flatMap(to: View.self) { maybeList in
+            guard let list = maybeList, let listID = list.id else {
+                return List(name: "Shop List").save(on: req).flatMap(to: View.self) { list in
+                    return try req.view().render("singlelist.leaf", IndexContext(title: list.name, listID: list.id!, items: nil))
+                }
+            }
+            
+            return try list.items.query(on: req).all().flatMap(to: View.self) { items in
+                return try req.view().render("singlelist.leaf", IndexContext(title: list.name, listID: listID, items: items))
+            }
         }
     }
 }
 
 struct IndexContext: Encodable {
-    let title = "Shop List"
+    let title: String
+    let listID: Int
     let items: [Item]?
 }

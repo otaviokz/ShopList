@@ -14,6 +14,7 @@ struct ListsWebsiteController: RouteCollection {
     
     func boot(router: Router) throws {
         router.get("lists", use: listsHandler)
+        router.get("lists", List.parameter, use: getListHandler)
         router.post(ListAddData.self, at: "addlist", use: addPostHandler)
         router.post("lists", List.parameter, "delete", use: deleteListHandler)
     }
@@ -22,8 +23,16 @@ struct ListsWebsiteController: RouteCollection {
 private extension ListsWebsiteController {
     func listsHandler(req: Request) throws -> Future<View> {
         return List.query(on: req).sort(\.name, .ascending).all().flatMap(to: View.self) {
-            items in
-            return try req.view().render("lists.leaf", ListContext(lists: items))
+            lists in
+            return try req.view().render("lists.leaf", ListsContext(lists: lists))
+        }
+    }
+    
+    func getListHandler(req: Request) throws -> Future<View> {
+        return try req.parameters.next(List.self).flatMap(to: View.self) { list in
+            return try list.items.query(on: req).all().flatMap(to: View.self) { items in
+                return try req.view().render("singlelist.leaf", SingleListContext(title: list.name, listID: list.id ?? 0, items: items))
+            }
         }
     }
     
@@ -39,9 +48,15 @@ private extension ListsWebsiteController {
     }
 }
 
-struct ListContext: Encodable {
+struct ListsContext: Encodable {
     let title = "Your Lists"
     let lists: [List]?
+}
+
+struct SingleListContext: Encodable {
+    let title: String
+    let listID: Int
+    let items: [Item]?
 }
 
 struct ListAddData: Content {

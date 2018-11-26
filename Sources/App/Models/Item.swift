@@ -11,9 +11,17 @@ import FluentPostgreSQL
 final class Item: Codable {
     var id: Int?
     var description: String
+    var listID: Int
     
-    init(description: String) {
+    init(description: String, listID: Int) {
         self.description = description
+        self.listID = listID
+    }
+}
+
+extension Item {
+    var list: Parent<Item, List> {
+        return parent(\.listID)
     }
 }
 

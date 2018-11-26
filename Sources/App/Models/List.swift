@@ -16,14 +16,46 @@ final class List: Codable {
         self.name = name
     }
     
-    var items: Siblings<List, Item, ListItemPivot> {
-        return siblings()
+    var items: Children<List, Item> {
+        return children(\.listID)
     }
 }
 
-extension List: Migration { }
+extension List: Migration {
+    typealias Database = PostgreSQLDatabase
+    static func prepare(on connection: PostgreSQLConnection) -> Future<Void> {
+        return Database.create(self, on: connection) { builder in
+            // Add original columns to the User table using User’s properties.
+            builder.field(for: \.id, isIdentifier: true)
+            builder.field(for: \.name)
+            // Add a unique index to name.
+            builder.unique(on: \.name)
+        }
+    }
+}
+
 extension List: PostgreSQLModel { }
 extension List: Content { }
 extension List: Parameter { }
 
+struct ShopList: Migration {
+    typealias Database = PostgreSQLDatabase
+    
+    static func prepare(on connection: PostgreSQLConnection) -> Future<Void> {
+        
+        return List.query(on: connection).filter(\.name == "Shop List").all().flatMap(to: Void.self) { lists in
+            if lists.count == 0 {
+                let list = List(name: "Shop List")
+                return list.save(on: connection).transform(to: ())
+            } else {
+                let list = lists.first
+                return list!.save(on: connection).transform(to: ())
+            }
+        }
+    }
+    
+    static func revert(on connection: PostgreSQLConnection) -> Future<Void> {
+        return .done(on: connection)
+    }
+}
 
