@@ -20,12 +20,15 @@ struct IndexWebsiteController: RouteCollection {
 private extension IndexWebsiteController {
     func indexHandler(req: Request) throws -> Future<View> {
         return List.query(on: req).filter(\.name == "Shop List").first().flatMap(to: View.self) { maybeList in
+            // Check is "Shop List" is already created
             guard let list = maybeList, let listID = list.id else {
+                // If not, create and render it
                 return List(name: "Shop List").save(on: req).flatMap(to: View.self) { list in
                     return try req.view().render("singlelist.leaf", IndexContext(title: list.name, listID: list.requireID(), items: nil))
                 }
             }
             
+            // If so, render it
             return try list.items.query(on: req).all().flatMap(to: View.self) { items in
                 return try req.view().render("singlelist.leaf", IndexContext(title: list.name, listID: listID, items: items))
             }

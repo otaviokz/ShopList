@@ -41,13 +41,6 @@ private extension ListsAPIController {
         }
     }
     
-    func getItems(listID: Int, req: Request) throws -> Future<[Item]> {
-        return List.find(listID, on: req).flatMap(to: [Item].self) { maybeList in
-            guard let list = maybeList else { throw Abort(.badRequest) }
-            return try list.items.query(on: req).all()
-        }
-    }
-    
     // MARK: - POST
     
     func createHandler(req: Request, data: ListCreateData) throws -> Future<List> {
