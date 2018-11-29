@@ -1,0 +1,58 @@
+#set("content") {
+<script src="/scripts/showResolution.js"></script>
+
+  <!-- <table style="margin-bottom: 20px;">
+    <tbody>
+      <tr>
+        <td>
+          <h1 style="margin-right: 5px;">#(title)</h1>
+        </td>
+        <td>
+          <img src="/images/flag.png" alt="Mandarin" style="margin-bottom: 7px;"/>
+        </td>
+      </tr>
+    </tbody>
+  </table> -->
+  #if(words && count(words) > 0) {
+    <h2>Test Questions</h2>
+    <table class="table table-bordered table-hover" style="text-align:center; margin-bottom: 10px;">
+      <tbody>
+        #for(word in words) {
+          <tr>
+            <td style="width: 40px;">
+              <h2>#(word.number)</h2>
+            </td>
+            <td>
+              <h2>#(word.characters)</h2>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    <button class="btn btn-primary" id="toggleButton" onclick="toggleSolution()" style="margin-bottom: 20px">Show Resolution</button>
+    <div id="resolution" hidden="true">
+      <h2>Test Solution</h2>
+      <table class="table table-bordered table-hover" style="text-align:center; color:grey;">
+        <tbody>
+          #for(word in words) {
+            <tr>
+              <td style="width: 20px;">
+                <h5>#(word.number)</h5>
+              </td>
+              <td>
+                <h5>#(word.pinyin)</h5>
+              </td>
+              <td>
+                <h7>#(word.translation)</h7>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  } else {
+    <h1>You don't have enough words yet!</h1>
+  }
+}
+
+#embed("base")

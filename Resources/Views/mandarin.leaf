@@ -6,41 +6,11 @@
           <h2 style="margin-right: 5px;">#(title)</h2>
         </td>
         <td>
-          <img src="/images/flag.png" alt="Shoplist Logo" style="margin-bottom: 7px;"/>
+          <img src="/images/flag.png" alt="Mandarin" style="margin-bottom: 7px;"/>
         </td>
       </tr>
     </tbody>
   </table>
-
-
-  <table class="table table-bordered table-hover" style="text-align:center;">
-    <thead class="thead-light">
-      <tr>
-        <th>Characters</th>
-        <th style="color:grey;">Pinyin</th>
-        <th style="color:grey;">Translation</th>
-      </tr>
-    </thead>
-    <tbody>
-      #if(words && count(words) > 0) {
-        #for(word in words) {
-          <tr>
-            <td>
-              <h4>#(word.characters)</h4>
-            </td>
-            <td>
-              <h5 style="color:grey;">#(word.pinyin)</h5>
-            </td>
-            <td>
-              <h6 style="color:grey;">#(word.translation)</h6>
-            </td>
-          </tr>
-        }
-      }
-
-    </tbody>
-  </table>
-
   <form method="post" action="/mandarin/add">
     <div class="form-group">
       <table>
@@ -69,6 +39,34 @@
       </table>
     </div>
   </form>
+
+  <table class="table table-bordered table-hover" style="text-align:center;">
+    <thead class="thead-light">
+      <tr>
+        <th>Characters</th>
+        <th style="color:grey;">Pinyin</th>
+        <th style="color:grey;">Translation</th>
+      </tr>
+    </thead>
+    <tbody>
+      #if(words && count(words) > 0) {
+        #for(word in words) {
+          <tr>
+            <td>
+              <h4>#(word.characters)</h4>
+            </td>
+            <td>
+              <h5 style="color:grey;">#(word.pinyin)</h5>
+            </td>
+            <td>
+              <h6 style="color:grey;">#(word.translation)</h6>
+            </td>
+          </tr>
+        }
+      }
+    </tbody>
+  </table>
+  <a href="/mandarin/test" style="max-width: 250px; float: left; margin-bottom: 20px;">Mandarin Test</a>
 }
 
 #embed("base")

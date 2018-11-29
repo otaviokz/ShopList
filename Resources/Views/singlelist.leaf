@@ -30,7 +30,6 @@
               </div>
             </form>
           </td>
-
         </tr>
         #if(items && count(items) > 0) {
           #for(item in items) {

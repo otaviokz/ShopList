@@ -21,6 +21,28 @@ final class MandarinWord: Codable {
         self.translation = translation.trimmingSpaces
         self.characterCount = self.characters.count
     }
+    
+    final class Test: Codable {
+        var id: Int?
+        var characters: String
+        var pinyin: String
+        var translation: String
+        var number: Int
+        
+        init(word: MandarinWord, number: Int) {
+            self.id = word.id
+            self.characters = word.characters
+            self.pinyin = word.pinyin
+            self.translation = word.translation
+            self.number = number
+        }
+    }
+}
+
+extension MandarinWord {
+    func convertToTest(with number: Int) -> MandarinWord.Test {
+        return MandarinWord.Test(word: self, number: number)
+    }
 }
 
 extension MandarinWord: Migration {
