@@ -1,7 +1,18 @@
 
 #set("content") {
-    <img src="/images/logo.png" class="mx-auto d-block" alt="Shoplist Logo" />
-    <h1>#(title)</h1>
+    <table style="margin-bottom: 10px;">
+      <tbody>
+        <tr>
+          <td>
+            <img src="/images/logo2.png"alt="Shoplist Logo"/>
+          </td>
+          <td>
+            <h1 style="vertical-align: bottom;">#(title)</h1>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
     <table class="table table-bordered table-hover">
       <thead class="thead-light">
         <tr>
@@ -15,7 +26,7 @@
               <div class="form-group">
               <input type="text" hidden="true" name="listID" class="form-control" id="listID" value="#(listID)"/>
                 <input type="text" placeholder="Ari sua linda!" name="description" class="form-control" id="description" style="max-width: 250px; float: left;"/>
-                <input class="btn btn-primary" type="submit" value="Add" style="float: right;"/>
+                <input class="btn btn-primary" type="submit" value="Add" style="float: right; width: 70px;"/>
               </div>
             </form>
           </td>

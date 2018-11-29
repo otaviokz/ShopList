@@ -21,7 +21,7 @@ struct MandarinWebsiteController: RouteCollection {
 
 private extension MandarinWebsiteController {
     func getAllHandler(req: Request) throws -> Future<View> {
-        return MandarinWord.query(on: req).sort(\.characters, .ascending).all().flatMap(to: View.self) { words in
+        return MandarinWord.query(on: req).sort(\.translation, .ascending).all().flatMap(to: View.self) { words in
             return try req.view().render("mandarin.leaf", MandarinWordsContext(words: words))
         }
     }
@@ -56,7 +56,7 @@ private extension MandarinWebsiteController {
 }
 
 struct MandarinWordsContext: Encodable {
-    let title = "Mandarin (Simplified)"
+    let title = "简体中文"
     let words: [MandarinWord]?
 }
 

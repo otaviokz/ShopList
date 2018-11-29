@@ -1,5 +1,17 @@
 #set("content") {
-  <h1>#(title)</h1>
+  <table>
+    <tbody>
+      <tr>
+        <td>
+          <h2 style="margin-right: 5px;">#(title)</h2>
+        </td>
+        <td>
+          <img src="/images/flag.png" alt="Shoplist Logo" style="margin-bottom: 7px;"/>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
 
   <table class="table table-bordered table-hover" style="text-align:center;">
     <thead class="thead-light">
@@ -35,22 +47,22 @@
         <tbody>
           <tr>
             <td>
-              <input type="text" placeholder="你好" name="characters" class="form-control" id="characters" style="max-width: 370px; float: left; margin-bottom: 5px;"/>
+              <input type="text" placeholder="你好" name="characters" class="form-control" id="characters" style="max-width: 365px; float: left; margin-bottom: 5px;"/>
             </td>
           </tr>
           <tr>
             <td>
-              <input type="text" placeholder="Nǐ hǎo" name="pinyin" class="form-control" id="pinyin" style="max-width: 370px; float: left; margin-bottom: 5px;"/>
+              <input type="text" placeholder="Nǐ hǎo" name="pinyin" class="form-control" id="pinyin" style="max-width: 365px; float: left; margin-bottom: 5px;"/>
             </td>
           </tr>
           <tr>
             <td>
-              <input type="text" placeholder="Hello" name="translation" class="form-control" id="translation" style="max-width: 370px; float: left; margin-bottom: 10px;"/>
+              <input type="text" placeholder="Hello" name="translation" class="form-control" id="translation" style="max-width: 365px; float: left; margin-bottom: 10px;"/>
             </td>
           </tr>
           <tr>
             <td>
-              <input class="btn btn-primary" type="submit" value="Add" style="width: 370px; float: left; margin-bottom: 10px;"/>
+              <input class="btn btn-primary" type="submit" value="Add" style="width: 345px; float: left; margin-bottom: 10px;"/>
             </td>
           </tr>
         </tbody>

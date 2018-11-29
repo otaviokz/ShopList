@@ -31,8 +31,8 @@
         <li class="nav-item #if(title == "Your Lists"){active}">
           <a href="/lists" class="nav-link">Your Lists</a>
         </li>
-        <li class="nav-item #if(title == "Mandarin (Simplified)"){active}">
-          <a href="/mandarin" class="nav-link">Mandarin</a>
+        <li class="nav-item #if(title == "简体中文"){active}">
+          <a href="/mandarin" class="nav-link">简体中文</a>
         </li>
       </ul>
     </div>
