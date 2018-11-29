@@ -31,6 +31,7 @@ private extension ItemsWebsiteController {
         } catch {
             // TODO: show some error
             print("Error saving data")
+            throw Abort(.expectationFailed)
         }
         
         let item = Item(description: data.description, listID: data.listID)

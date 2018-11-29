@@ -1,0 +1,95 @@
+//
+//  MandarinWebsiteController.swift
+//  App
+//
+//  Created by Otávio Zabaleta on 29/11/2018.
+//
+
+import Vapor
+import Leaf
+import Fluent
+
+struct MandarinWebsiteController: RouteCollection {
+    static let shared = MandarinWebsiteController()
+    
+    func boot(router: Router) throws {
+        router.get("mandarin", use: getAllHandler)
+        router.post(MandarinWordAddData.self, at: "mandarin", "add", use: addPostHandler)
+        router.post("mandarin", MandarinWord.parameter, "delete", use: deleteWordHandler)
+    }
+}
+
+private extension MandarinWebsiteController {
+    func getAllHandler(req: Request) throws -> Future<View> {
+        return MandarinWord.query(on: req).sort(\.characters, .ascending).all().flatMap(to: View.self) { words in
+            return try req.view().render("mandarin.leaf", MandarinWordsContext(words: words))
+        }
+    }
+    
+    func addPostHandler(req: Request, data: MandarinWordAddData) throws -> Future<Response> {
+        let fixedData: MandarinWordAddData
+        do {
+            fixedData = MandarinWordAddData(characters: data.characters,
+                                            pinyin: data.pinyin,
+                                            translation: data.translation)
+            
+            try fixedData.validate()
+        } catch {
+            // TODO: show some error
+            print("Error saving data")
+            throw Abort(.expectationFailed)
+        }
+        
+        let word = MandarinWord(characters: fixedData.characters,
+                                pinyin: fixedData.pinyin,
+                                translation: fixedData.translation)
+        return word.save(on: req).map(to: Response.self) { _ in
+            return req.redirect(to: "/mandarin")
+        }
+    }
+    
+    func deleteWordHandler(req: Request) throws -> Future<Response> {
+        return try req.parameters.next(MandarinWord.self).flatMap(to: Response.self) { word in
+            return word.delete(on: req).transform(to: req.redirect(to: "/mandarin"))
+        }
+    }
+}
+
+struct MandarinWordsContext: Encodable {
+    let title = "Mandarin (Simplified)"
+    let words: [MandarinWord]?
+}
+
+struct MandarinWordAddData: Content {
+    let characters: String
+    let pinyin: String
+    let translation: String
+    
+    init(characters: String, pinyin: String, translation: String) {
+        self.characters = characters.removingAllSpaces
+        self.pinyin = pinyin.trimmingSpaces
+        self.translation = translation.trimmingSpaces
+    }
+}
+
+enum MandarinValidationError: Error {
+    case invalidCharacters
+}
+
+extension MandarinWordAddData: Validatable, Reflectable {
+    
+    func validate() throws {
+        if !characters.containsOnlyChineseCharacters {
+            throw MandarinValidationError.invalidCharacters
+        }
+        try MandarinWordAddData.validations().run(on: self)
+    }
+    
+    static func validations() throws -> Validations<MandarinWordAddData> {
+        var validations = Validations(MandarinWordAddData.self)
+        try validations.add(\.characters, .count(1...))
+        try validations.add(\.pinyin, .count(1...))
+        try validations.add(\.translation, .count(1...))
+        return validations
+    }
+}

@@ -207,6 +207,62 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Mandarin",
+			"item": [
+				{
+					"name": "Remove",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://otaviokz-shoplist-prod.vapor.cloud/api/mandarin/5",
+							"protocol": "https",
+							"host": [
+								"otaviokz-shoplist-prod",
+								"vapor",
+								"cloud"
+							],
+							"path": [
+								"api",
+								"mandarin",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://otaviokz-shoplist-prod.vapor.cloud/api/mandarin",
+							"protocol": "https",
+							"host": [
+								"otaviokz-shoplist-prod",
+								"vapor",
+								"cloud"
+							],
+							"path": [
+								"api",
+								"mandarin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

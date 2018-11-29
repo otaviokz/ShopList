@@ -9,30 +9,6 @@
 			"name": "Items",
 			"item": [
 				{
-					"name": "Remove",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "localhost:8080/api/listitems/2",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"listitems",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "All",
 					"request": {
 						"method": "GET",
@@ -42,14 +18,62 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:8080/api/listitems",
+							"raw": "localhost:8080/api/items",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"api",
-								"listitems"
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/api/items/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"items",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/api/items/18",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"items",
+								"18"
 							]
 						}
 					},
@@ -68,30 +92,25 @@
 							"formdata": [
 								{
 									"key": "description",
-									"value": "mayo",
+									"value": "Ari",
+									"type": "text"
+								},
+								{
+									"key": "listID",
+									"value": "2",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "localhost:8080/api/listitems",
+							"raw": "localhost:8080/api/items",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"api",
-								"listitems"
-							],
-							"query": [
-								{
-									"key": "",
-									"value": ""
-								},
-								{
-									"key": "",
-									"value": ""
-								}
+								"items"
 							]
 						}
 					},
@@ -107,15 +126,15 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:8080/api/listitems/25/lists/2",
+							"raw": "localhost:8080/api/items/4/lists/2",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"api",
-								"listitems",
-								"25",
+								"items",
+								"4",
 								"lists",
 								"2"
 							]
@@ -128,30 +147,6 @@
 		{
 			"name": "Lists",
 			"item": [
-				{
-					"name": "ID",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "localhost:8080/api/lists/2",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"lists",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
 				{
 					"name": "All",
 					"request": {
@@ -176,6 +171,31 @@
 					"response": []
 				},
 				{
+					"name": "List Items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/api/lists/2/items",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"lists",
+								"2",
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Create",
 					"request": {
 						"method": "POST",
@@ -185,7 +205,7 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "Gifts",
+									"value": "Christmas",
 									"type": "text"
 								}
 							]
@@ -214,7 +234,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:8080/api/lists/1",
+							"raw": "localhost:8080/api/lists/12",
 							"host": [
 								"localhost"
 							],
@@ -222,7 +242,59 @@
 							"path": [
 								"api",
 								"lists",
-								"1"
+								"12"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Mandarin",
+			"item": [
+				{
+					"name": "Remove",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/api/mandarin/5",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"mandarin",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/api/mandarin",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"mandarin"
 							]
 						}
 					},

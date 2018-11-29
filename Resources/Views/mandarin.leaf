@@ -1,0 +1,62 @@
+#set("content") {
+  <h1>#(title)</h1>
+
+  <table class="table table-bordered table-hover" style="text-align:center;">
+    <thead class="thead-light">
+      <tr>
+        <th>Characters</th>
+        <th style="color:grey;">Pinyin</th>
+        <th style="color:grey;">Translation</th>
+      </tr>
+    </thead>
+    <tbody>
+      #if(words && count(words) > 0) {
+        #for(word in words) {
+          <tr>
+            <td>
+              <h4>#(word.characters)</h4>
+            </td>
+            <td>
+              <h5 style="color:grey;">#(word.pinyin)</h5>
+            </td>
+            <td>
+              <h6 style="color:grey;">#(word.translation)</h6>
+            </td>
+          </tr>
+        }
+      }
+
+    </tbody>
+  </table>
+
+  <form method="post" action="/mandarin/add">
+    <div class="form-group">
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <input type="text" placeholder="你好" name="characters" class="form-control" id="characters" style="max-width: 370px; float: left; margin-bottom: 5px;"/>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="text" placeholder="Nǐ hǎo" name="pinyin" class="form-control" id="pinyin" style="max-width: 370px; float: left; margin-bottom: 5px;"/>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="text" placeholder="Hello" name="translation" class="form-control" id="translation" style="max-width: 370px; float: left; margin-bottom: 10px;"/>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input class="btn btn-primary" type="submit" value="Add" style="width: 370px; float: left; margin-bottom: 10px;"/>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </form>
+}
+
+#embed("base")
