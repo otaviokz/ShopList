@@ -37,6 +37,14 @@ private extension ListsWebsiteController {
     }
     
     func addPostHandler(req: Request, data: ListAddData) throws -> Future<Response> {
+        do {
+            try data.validate()
+        } catch {
+            // TODO: show some error
+            print("Error saving data")
+            throw Abort(.expectationFailed)
+        }
+        
         let list = List(name: data.name)
         return list.save(on: req).map(to: Response.self) { list in
             return req.redirect(to: "lists")
@@ -61,4 +69,13 @@ struct SingleListContext: Encodable {
 
 struct ListAddData: Content {
     let name: String
+}
+
+extension ListAddData: Validatable, Reflectable {
+    static func validations() throws -> Validations<ListAddData> {
+        var validations = Validations(ListAddData.self)
+        let validator = Validator<String>.listNamingValidator
+        try validations.add(\.name, validator && .count(2...))
+        return validations
+    }
 }

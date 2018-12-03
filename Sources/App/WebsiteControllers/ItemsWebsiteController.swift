@@ -49,9 +49,8 @@ struct ItemAddData: Content {
 extension ItemAddData: Validatable, Reflectable {
     static func validations() throws -> Validations<ItemAddData> {
         var validations = Validations(ItemAddData.self)
-        
-        try validations.add(\.description, .alphanumeric && .count(3...))
-        
+        let validator = Validator<String>.genericTextValidator
+        try validations.add(\.description, validator && .count(1...))
         return validations
     }
 }
