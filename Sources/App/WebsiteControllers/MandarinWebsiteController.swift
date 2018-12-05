@@ -129,7 +129,7 @@ enum MandarinValidationError: Error {
 extension MandarinWordAddData: Validatable, Reflectable {
     
     func validate() throws {
-        if !characters.containsOnlyChineseCharacters {
+        if !characters.containsChineseCharacters {
             throw MandarinValidationError.invalidCharacters
         }
         try MandarinWordAddData.validations().run(on: self)
