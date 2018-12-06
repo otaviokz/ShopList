@@ -11,6 +11,16 @@
 				{
 					"name": "All",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -18,10 +28,10 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://otaviokz-shoplist-prod.vapor.cloud/api/listitems",
+							"raw": "https://shoplist-ari-prod.vapor.cloud/api/listitems",
 							"protocol": "https",
 							"host": [
-								"otaviokz-shoplist-prod",
+								"shoplist-ari-prod",
 								"vapor",
 								"cloud"
 							],
@@ -36,6 +46,16 @@
 				{
 					"name": "Remove",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"body": {
@@ -43,10 +63,10 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://otaviokz-shoplist-prod.vapor.cloud/api/listitems/2",
+							"raw": "https://shoplist-ari-prod.vapor.cloud/api/listitems/2",
 							"protocol": "https",
 							"host": [
-								"otaviokz-shoplist-prod",
+								"shoplist-ari-prod",
 								"vapor",
 								"cloud"
 							],
@@ -63,7 +83,14 @@
 					"name": "Create",
 					"request": {
 						"auth": {
-							"type": "noauth"
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [],
@@ -78,10 +105,10 @@
 							]
 						},
 						"url": {
-							"raw": "https://otaviokz-shoplist-prod.vapor.cloud/api/listitems",
+							"raw": "https://shoplist-ari-prod.vapor.cloud/api/listitems",
 							"protocol": "https",
 							"host": [
-								"otaviokz-shoplist-prod",
+								"shoplist-ari-prod",
 								"vapor",
 								"cloud"
 							],
@@ -101,6 +128,16 @@
 				{
 					"name": "ID",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -108,10 +145,10 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://otaviokz-shoplist-prod.vapor.cloud/api/lists/2",
+							"raw": "https://shoplist-ari-prod.vapor.cloud/api/lists/2",
 							"protocol": "https",
 							"host": [
-								"otaviokz-shoplist-prod",
+								"shoplist-ari-prod",
 								"vapor",
 								"cloud"
 							],
@@ -127,6 +164,16 @@
 				{
 					"name": "All",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -134,10 +181,10 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://otaviokz-shoplist-prod.vapor.cloud/api/lists",
+							"raw": "https://shoplist-ari-prod.vapor.cloud/api/lists",
 							"protocol": "https",
 							"host": [
-								"otaviokz-shoplist-prod",
+								"shoplist-ari-prod",
 								"vapor",
 								"cloud"
 							],
@@ -152,6 +199,16 @@
 				{
 					"name": "Create",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -165,10 +222,10 @@
 							]
 						},
 						"url": {
-							"raw": "https://otaviokz-shoplist-prod.vapor.cloud/api/lists",
+							"raw": "https://shoplist-ari-prod.vapor.cloud/api/lists",
 							"protocol": "https",
 							"host": [
-								"otaviokz-shoplist-prod",
+								"shoplist-ari-prod",
 								"vapor",
 								"cloud"
 							],
@@ -183,6 +240,16 @@
 				{
 					"name": "Remove",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"body": {
@@ -190,10 +257,10 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://otaviokz-shoplist-prod.vapor.cloud/api/lists/1",
+							"raw": "https://shoplist-ari-prod.vapor.cloud/api/lists/1",
 							"protocol": "https",
 							"host": [
-								"otaviokz-shoplist-prod",
+								"shoplist-ari-prod",
 								"vapor",
 								"cloud"
 							],
@@ -214,6 +281,16 @@
 				{
 					"name": "Remove",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"body": {
@@ -221,22 +298,62 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://otaviokz-shoplist-prod.vapor.cloud/api/mandarin/5",
+							"raw": "https://shoplist-ari-prod.vapor.cloud/api/mandarin/39",
 							"protocol": "https",
 							"host": [
-								"otaviokz-shoplist-prod",
+								"shoplist-ari-prod",
 								"vapor",
 								"cloud"
 							],
 							"path": [
 								"api",
 								"mandarin",
-								"5"
+								"39"
 							]
 						}
 					},
 					"response": []
 				},
+				{
+					"name": "All",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://shoplist-ari-prod.vapor.cloud/api/mandarin",
+							"protocol": "https",
+							"host": [
+								"shoplist-ari-prod",
+								"vapor",
+								"cloud"
+							],
+							"path": [
+								"api",
+								"mandarin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
 				{
 					"name": "All",
 					"request": {
@@ -247,16 +364,169 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://otaviokz-shoplist-prod.vapor.cloud/api/mandarin",
+							"raw": "https://shoplist-ari-prod.vapor.cloud/api/users",
 							"protocol": "https",
 							"host": [
-								"otaviokz-shoplist-prod",
+								"shoplist-ari-prod",
 								"vapor",
 								"cloud"
 							],
 							"path": [
 								"api",
-								"mandarin"
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://shoplist-ari-prod.vapor.cloud/api/users/219475B1-84BF-4B7B-A1AB-3ED5F3286EA3",
+							"protocol": "https",
+							"host": [
+								"shoplist-ari-prod",
+								"vapor",
+								"cloud"
+							],
+							"path": [
+								"api",
+								"users",
+								"219475B1-84BF-4B7B-A1AB-3ED5F3286EA3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Otavio",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "otaviokz",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Oleardr2019!",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://shoplist-ari-prod.vapor.cloud/api/users",
+							"protocol": "https",
+							"host": [
+								"shoplist-ari-prod",
+								"vapor",
+								"cloud"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5fe3767b-6752-45f8-bc0c-556a3357cf48",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    try {  ",
+									"        var data = JSON.parse(responseBody);",
+									"        var token = data.token;",
+									"        ",
+									"        pm.globals.set(\"token\", token);",
+									"        console.log(token);",
+									"    }",
+									"    catch (e) {",
+									"        console.log(e);",
+									"    }",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "Oleardr2019!",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "otaviokz",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://shoplist-ari-prod.vapor.cloud/api/users/login",
+							"protocol": "https",
+							"host": [
+								"shoplist-ari-prod",
+								"vapor",
+								"cloud"
+							],
+							"path": [
+								"api",
+								"users",
+								"login"
 							]
 						}
 					},

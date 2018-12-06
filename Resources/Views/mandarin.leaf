@@ -9,6 +9,11 @@
           <img src="/images/flag.png" alt="Mandarin" style="margin-bottom: 7px;"/>
         </td>
       </tr>
+      <tr>
+        <td>
+          <a href="/mandarin/test" style="max-width: 250px; float: left; margin-bottom: 20px;">Mandarin Test</a>
+        </td>
+      </tr>
     </tbody>
   </table>
   <form method="post" action="/mandarin/add">
@@ -39,7 +44,6 @@
       </table>
     </div>
   </form>
-
   <table class="table table-bordered table-hover" style="text-align:center;">
     <thead class="thead-light">
       <tr>
@@ -66,7 +70,6 @@
       }
     </tbody>
   </table>
-  <a href="/mandarin/test" style="max-width: 250px; float: left; margin-bottom: 20px;">Mandarin Test</a>
 }
 
 #embed("base")
