@@ -8,12 +8,15 @@
 import Vapor
 import Leaf
 import Fluent
+import Authentication 
 
 struct IndexWebsiteController: RouteCollection {
     static let shared = IndexWebsiteController()
     
     func boot(router: Router) throws {
-        router.get(use: indexHandler)
+        let authSessionRoutes = router.grouped(User.authSessionsMiddleware())
+        let protectedRoutes = authSessionRoutes.grouped(RedirectMiddleware<User>(path: "/login"))
+        protectedRoutes.get(use: indexHandler)
     }
 }
 

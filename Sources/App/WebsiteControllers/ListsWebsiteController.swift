@@ -8,15 +8,18 @@
 import Vapor
 import Leaf
 import Fluent
+import Authentication
 
 struct ListsWebsiteController: RouteCollection {
     static let shared = ListsWebsiteController()
     
     func boot(router: Router) throws {
-        router.get("lists", use: listsHandler)
-        router.get("lists", List.parameter, use: getListHandler)
-        router.post(ListAddData.self, at: "addlist", use: addPostHandler)
-        router.post("lists", List.parameter, "delete", use: deleteListHandler)
+        let authSessionRoutes = router.grouped(User.authSessionsMiddleware())
+        let protectedRoutes = authSessionRoutes.grouped(RedirectMiddleware<User>(path: "/login"))
+        protectedRoutes.get("lists", use: listsHandler)
+        protectedRoutes.get("lists", List.parameter, use: getListHandler)
+        protectedRoutes.post(ListAddData.self, at: "addlist", use: addPostHandler)
+        protectedRoutes.post("lists", List.parameter, "delete", use: deleteListHandler)
     }
 }
 

@@ -11,21 +11,15 @@ import Fluent
 import Random
 import COperatingSystem
 import Bits
+import Authentication
 
 struct MandarinWebsiteController: RouteCollection {
     static let shared = MandarinWebsiteController()
     
-    func boot(router: Router) throws {
-        router.get("mandarin", use: getAllHandler)
-        router.get("mandarin", "test", use: getTestHandler)
-        router.post(MandarinWordAddData.self, at: "mandarin", "add", use: addPostHandler)
-        router.post("mandarin", MandarinWord.parameter, "delete", use: deleteWordHandler)
-    }
-    
     #if os(Linux)
     /// Generates a random number between (and inclusive of)
     /// the given minimum and maximum.
-    private let randomInitialized: Bool = {
+    let randomInitialized: Bool = {
         /// This stylized initializer is used to work around dispatch_once
         /// not existing and still guarantee thread safety
         let current = Date().timeIntervalSinceReferenceDate
@@ -34,9 +28,30 @@ struct MandarinWebsiteController: RouteCollection {
         return true
     }()
     #endif
+    
+    func boot(router: Router) throws {
+        let authSessionRoutes = router.grouped(User.authSessionsMiddleware())
+        let protectedRoutes = authSessionRoutes.grouped(RedirectMiddleware<User>(path: "/login"))
+        protectedRoutes.get("mandarin", use: getAllHandler)
+        protectedRoutes.get("mandarin", "test", use: getTestHandler)
+        router.get("mandarin", "opentest", use: getOpenTestHandler)
+        protectedRoutes.post(MandarinWordAddData.self, at: "mandarin", "add", use: addPostHandler)
+        protectedRoutes.post("mandarin", MandarinWord.parameter, "delete", use: deleteWordHandler)
+    }
 }
 
 private extension MandarinWebsiteController {
+    func makeRandom(min: Int, max: Int) -> Int {
+        let top = max - min + 1
+        #if os(Linux)
+        // will always be initialized
+        guard randomInitialized else { fatalError() }
+        return Int(COperatingSystem.random() % top) + min
+        #else
+        return Int(arc4random_uniform(UInt32(top))) + min
+        #endif
+    }
+    
     func getAllHandler(req: Request) throws -> Future<View> {
         return MandarinWord.query(on: req).sort(\.translation, .ascending).all().flatMap(to: View.self) { words in
             return try req.view().render("mandarin.leaf", MandarinWordsContext(words: words))
@@ -57,6 +72,23 @@ private extension MandarinWebsiteController {
             }
             
             return try req.view().render("mandarinTest.leaf", MandarinTestContext(words: testWords))
+        }
+    }
+    
+    func getOpenTestHandler(req: Request) throws -> Future<View> {
+        return MandarinWord.query(on: req).all().flatMap(to: View.self) { words in
+            let max = words.count - 1
+            let numberOfCards = min(6, max)
+            var testWords = [MandarinWord.Test]()
+            while testWords.count < numberOfCards {
+                let index = self.makeRandom(min: 0, max: max)
+                let word = words[index]
+                if !testWords.contains(where: { $0.id == word.id }) {
+                    testWords.append(word.convertToTest(with: testWords.count + 1))
+                }
+            }
+            
+            return try req.view().render("openMandarinTest.leaf", MandarinTestContext(words: testWords))
         }
     }
     
@@ -86,17 +118,6 @@ private extension MandarinWebsiteController {
         return try req.parameters.next(MandarinWord.self).flatMap(to: Response.self) { word in
             return word.delete(on: req).transform(to: req.redirect(to: "/mandarin"))
         }
-    }
-    
-    func makeRandom(min: Int, max: Int) -> Int {
-        let top = max - min + 1
-        #if os(Linux)
-        // will always be initialized
-            guard randomInitialized else { fatalError() }
-            return Int(COperatingSystem.random() % top) + min
-        #else
-            return Int(arc4random_uniform(UInt32(top))) + min
-        #endif
     }
 }
 
@@ -144,3 +165,6 @@ extension MandarinWordAddData: Validatable, Reflectable {
     }
 }
 
+extension Int {
+    
+}

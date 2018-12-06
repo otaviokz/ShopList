@@ -13,11 +13,12 @@ struct ItemsAPIController: RouteCollection {
     
     func boot(router: Router) throws {
         let itemsRoutes = router.grouped("api", "items")
+        let tokenAuthGroup = itemsRoutes.grouped(User.tokenAuthMiddleware(), User.guardAuthMiddleware())
         
-        itemsRoutes.get(use: getAllHandler)
-        itemsRoutes.get(Item.parameter, use: getByIDHandler)
-        itemsRoutes.post(ItemCreateData.self, use: createHandler)
-        itemsRoutes.delete(Item.parameter, use: deleteHandler)
+        tokenAuthGroup.get(use: getAllHandler)
+        tokenAuthGroup.get(Item.parameter, use: getByIDHandler)
+        tokenAuthGroup.post(ItemCreateData.self, use: createHandler)
+        tokenAuthGroup.delete(Item.parameter, use: deleteHandler)
     }
 }
 

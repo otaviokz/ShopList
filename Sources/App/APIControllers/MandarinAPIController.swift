@@ -13,8 +13,10 @@ struct MandarinAPIController: RouteCollection {
     
     func boot(router: Router) throws {
         let mandarinRoutes = router.grouped("api", "mandarin")
-        mandarinRoutes.get(use: getAllHandler)
-        mandarinRoutes.delete(MandarinWord.parameter, use: deleteHandler)
+        let tokenAuthGroup = mandarinRoutes.grouped(User.tokenAuthMiddleware(), User.guardAuthMiddleware())
+        
+        tokenAuthGroup.get(use: getAllHandler)
+        tokenAuthGroup.delete(MandarinWord.parameter, use: deleteHandler)
     }
 }
 

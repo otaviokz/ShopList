@@ -7,17 +7,20 @@
 
 import Vapor
 import Fluent
+import Authentication
 
 struct ListsAPIController: RouteCollection {
     static let shared = ListsAPIController()
     
     func boot(router: Router) throws {
         let listRoutes = router.grouped("api", "lists")
-        listRoutes.get(use: getAllHandler)
-        listRoutes.get(List.parameter, use: getHandler)
-        listRoutes.get(List.parameter, "items", use: getItemsHandler)
-        listRoutes.post(ListCreateData.self, use: createHandler)
-        listRoutes.delete(List.parameter, use: deleteHandler)
+        let tokenAuthGroup = listRoutes.grouped(User.tokenAuthMiddleware(), User.guardAuthMiddleware())
+        
+        tokenAuthGroup.get(use: getAllHandler)
+        tokenAuthGroup.get(List.parameter, use: getHandler)
+        tokenAuthGroup.get(List.parameter, "items", use: getItemsHandler)
+        tokenAuthGroup.post(ListCreateData.self, use: createHandler)
+        tokenAuthGroup.delete(List.parameter, use: deleteHandler)
     }
 }
 
