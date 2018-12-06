@@ -13,7 +13,27 @@
 </head>
 <body>
   <script src="/scripts/showResolution.js"></script>
+
   <div class="container mt-3">
+    <table style="margin-bottom: 40px;">
+      <tbody>
+        <tr>
+          <td>
+            <h2 style="margin-right: 15px; float: left;">#(title)</h2>
+          </td>
+          <td>
+            <img src="/images/flag.png" alt="Mandarin" style="margin-bottom: 10px;"/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="/mandarin/opentest">Refresh</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
     #if(words && count(words) > 0) {
       <h2>Test Questions</h2>
       <table class="table table-bordered table-hover" style="text-align:center; margin-bottom: 10px;">
