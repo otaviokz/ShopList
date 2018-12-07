@@ -10,6 +10,7 @@
     integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
     crossorigin="anonymous">
 
+    <link rel="stylesheet" href="/styles/style.css">
     <title>#(title)</title>
 </head>
 <body>
@@ -42,6 +43,18 @@
   <div class="container mt-3">
       #get(content)
   </div>
+<script src="/scripts/cookies.js"></script>
+  #if(showCookiesMessage) {
+      <footer id="cookie-footer">
+        <div id="cookieMessage" class="container">
+          <span class="muted">
+            This site uses cookies! To accept this, click
+            <a href="#" onclick="cookiesConfirmed()">OK</a>
+          </span>
+        </div>
+      </footer>
+  }
+
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT"
