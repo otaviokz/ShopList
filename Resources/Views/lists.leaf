@@ -11,7 +11,7 @@
         <td>
           <form method="post" action="/addlist">
             <div class="form-group">
-              <input type="text" placeholder="Ari sua linda!" name="name" class="form-control" id="name" style="max-width: 250px; float: left;"/>
+              <input type="text" placeholder="Ari sua linda!" name="name" class="form-control" id="name" style="max-width: 200px; float: left;"/>
               <input class="btn btn-primary" type="submit" value="Add" style="float: right;  width: 70px;"/>
             </div>
           </form>
@@ -23,7 +23,7 @@
           <tr>
             <td>
                 <!-- <h5 style="float: left;">#(list.name)</h5> -->
-                <a href="/lists/#(list.id)" style="max-width: 250px; float: left;">#(list.name)</a>
+                <a href="/lists/#(list.id)" style="max-width: 230px; float: left;">#(list.name)</a>
                 <form method="post" action="/lists/#(list.id)/delete" >
                     <input class="btn btn-danger" type="submit" value="Delete" style="float: right;"/>
                 </form>

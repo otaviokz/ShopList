@@ -25,7 +25,7 @@
             <form method="post" action="/lists/#(listID)/additem">
               <div class="form-group">
               <input type="text" hidden="true" name="listID" class="form-control" id="listID" value="#(listID)"/>
-                <input type="text" placeholder="Ari sua linda!" name="description" class="form-control" id="description" style="max-width: 250px; float: left;"/>
+                <input type="text" placeholder="Ari sua linda!" name="description" class="form-control" id="description" style="max-width: 200px; float: left;"/>
                 <input class="btn btn-primary" type="submit" value="Add" style="float: right; width: 70px;"/>
               </div>
             </form>
@@ -35,7 +35,7 @@
           #for(item in items) {
             <tr>
               <td>
-                  <h5 style="float: left;">#(item.description)</h5>
+                  <h5 style="float: left; max-width: 200px;">#(item.description)</h5>
                   <form method="post" action="/items/#(item.id)/delete" >
                       <input class="btn btn-danger" type="submit" value="Delete" style="float: right;"/>
                   </form>
