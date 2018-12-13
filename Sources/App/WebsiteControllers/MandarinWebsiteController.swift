@@ -54,7 +54,12 @@ private extension MandarinWebsiteController {
     
     func getAllHandler(req: Request) throws -> Future<View> {
         return MandarinWord.query(on: req).sort(\.translation, .ascending).all().flatMap(to: View.self) { words in
-            return try req.view().render("mandarin.leaf", MandarinWordsContext(words: words))
+            var message: String?
+            if let msg = req.query[String.self, at: "message"] {
+                message = msg
+            }
+            
+            return try req.view().render("mandarin.leaf", MandarinWordsContext(words: words, message: message))
         }
     }
     
@@ -100,10 +105,16 @@ private extension MandarinWebsiteController {
                                             translation: data.translation)
             
             try fixedData.validate()
-        } catch {
-            // TODO: show some error
-            print("Error saving data")
-            throw Abort(.expectationFailed)
+        } catch let error {
+            var redirect: String
+            if let mandarinError = error as? MandarinValidationError {
+                redirect = "/mandarin?message=\(mandarinError.string)"
+            }
+            else {
+                redirect = "/mandarin?message=Unknown+error"
+            }
+            
+            return req.future(req.redirect(to: redirect))
         }
         
         let word = MandarinWord(characters: fixedData.characters,
@@ -124,6 +135,12 @@ private extension MandarinWebsiteController {
 struct MandarinWordsContext: Encodable {
     let title = "简体中文"
     let words: [MandarinWord]?
+    let message: String?
+    
+    init(words: [MandarinWord]? = nil, message: String? = nil) {
+        self.words = words
+        self.message = message
+    }
 }
 
 struct MandarinTestContext: Encodable {
@@ -144,14 +161,21 @@ struct MandarinWordAddData: Content {
 }
 
 enum MandarinValidationError: Error {
-    case invalidCharacters
+    case invalidCharacters(word: String)
+    
+    var string: String {
+        switch self {
+        case .invalidCharacters(let word):
+            return "The word `\(word)` has no Mandarin characters."
+        }
+    }
 }
 
 extension MandarinWordAddData: Validatable, Reflectable {
     
     func validate() throws {
         if !characters.containsChineseCharacters {
-            throw MandarinValidationError.invalidCharacters
+            throw MandarinValidationError.invalidCharacters(word: characters)
         }
         try MandarinWordAddData.validations().run(on: self)
     }
@@ -163,8 +187,4 @@ extension MandarinWordAddData: Validatable, Reflectable {
         try validations.add(\.translation, .count(1...))
         return validations
     }
-}
-
-extension Int {
-    
 }

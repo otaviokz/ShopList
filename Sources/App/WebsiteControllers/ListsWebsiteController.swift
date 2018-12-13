@@ -44,8 +44,7 @@ private extension ListsWebsiteController {
             try data.validate()
         } catch {
             // TODO: show some error
-            print("Error saving data")
-            throw Abort(.expectationFailed)
+            return req.future(req.redirect(to: "/lists"))
         }
         
         let list = List(name: data.name)

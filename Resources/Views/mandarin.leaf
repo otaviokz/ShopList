@@ -16,6 +16,12 @@
       </tr>
     </tbody>
   </table>
+  #if(message) {
+    <div class="alert alert-danger" role="alert">
+      Please fix the following errors:<br/>
+      #(message)
+    </div>
+  }
   <form method="post" action="/mandarin/add">
     <div class="form-group">
       <table>
