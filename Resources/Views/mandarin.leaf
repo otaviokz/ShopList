@@ -28,17 +28,17 @@
         <tbody>
           <tr>
             <td>
-              <input type="text" placeholder="你好" name="characters" class="form-control" id="characters" style="max-width: 365px; float: left; margin-bottom: 5px;"/>
+              <input type="text" placeholder="汉字" value="#if(characters) {#(characters)}" name="characters" class="form-control" id="characters" style="max-width: 365px; float: left; margin-bottom: 5px;"/>
             </td>
           </tr>
           <tr>
             <td>
-              <input type="text" placeholder="Nǐ hǎo" name="pinyin" class="form-control" id="pinyin" style="max-width: 365px; float: left; margin-bottom: 5px;"/>
+              <input type="text" placeholder="Hànzì" value="#if(pinyin) {#(pinyin)}" name="pinyin" class="form-control" id="pinyin" style="max-width: 365px; float: left; margin-bottom: 5px;"/>
             </td>
           </tr>
           <tr>
             <td>
-              <input type="text" placeholder="Hello" name="translation" class="form-control" id="translation" style="max-width: 365px; float: left; margin-bottom: 10px;"/>
+              <input type="text" placeholder="Chinese character" value="#if(translation) {#(translation)}" name="translation" class="form-control" id="translation" style="max-width: 365px; float: left; margin-bottom: 10px;"/>
             </td>
           </tr>
           <tr>

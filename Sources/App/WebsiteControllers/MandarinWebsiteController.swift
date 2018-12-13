@@ -59,7 +59,11 @@ private extension MandarinWebsiteController {
                 message = msg
             }
             
-            return try req.view().render("mandarin.leaf", MandarinWordsContext(words: words, message: message))
+            return try req.view().render("mandarin.leaf", MandarinWordsContext(words: words,
+                                                                               message: message,
+                                                                               characters: req.query[String.self, at: "characters"],
+                                                                               pinyin: req.query[String.self, at: "pinyin"],
+                                                                               translation: req.query[String.self, at: "translation"]))
         }
     }
     
@@ -106,6 +110,7 @@ private extension MandarinWebsiteController {
             
             try fixedData.validate()
         } catch let error {
+            // TODO: show some error
             var redirect: String
             if let mandarinError = error as? MandarinValidationError {
                 redirect = "/mandarin?message=\(mandarinError.string)"
@@ -113,6 +118,8 @@ private extension MandarinWebsiteController {
             else {
                 redirect = "/mandarin?message=Unknown+error"
             }
+            
+            redirect.append(contentsOf: "&characters=\(data.characters)&pinyin=\(data.pinyin)&translation=\(data.translation)")
             
             return req.future(req.redirect(to: redirect))
         }
@@ -136,10 +143,20 @@ struct MandarinWordsContext: Encodable {
     let title = "简体中文"
     let words: [MandarinWord]?
     let message: String?
+    let characters: String?
+    let pinyin: String?
+    let translation: String?
     
-    init(words: [MandarinWord]? = nil, message: String? = nil) {
+    init(words: [MandarinWord]? = nil,
+         message: String? = nil,
+         characters: String? = nil,
+         pinyin: String? = nil,
+         translation: String? = nil) {
         self.words = words
         self.message = message
+        self.characters = characters
+        self.pinyin = pinyin
+        self.translation = translation
     }
 }
 
@@ -162,11 +179,14 @@ struct MandarinWordAddData: Content {
 
 enum MandarinValidationError: Error {
     case invalidCharacters(word: String)
+    case emptyField(field: String)
     
     var string: String {
         switch self {
         case .invalidCharacters(let word):
-            return "The word `\(word)` has no Mandarin characters."
+            return "The word '\(word)' has no Mandarin characters."
+        case .emptyField(let field):
+            return "Field '\(field)' cannot be empty."
         }
     }
 }
@@ -174,9 +194,22 @@ enum MandarinValidationError: Error {
 extension MandarinWordAddData: Validatable, Reflectable {
     
     func validate() throws {
+        if characters.trimmingSpaces.count == 0 {
+            throw MandarinValidationError.emptyField(field: "characters (汉字)")
+        }
+        
+        if pinyin.trimmingSpaces.count == 0 {
+            throw MandarinValidationError.emptyField(field: "pinyin (Hànzì)")
+        }
+        
+        if translation.trimmingSpaces.count == 0 {
+            throw MandarinValidationError.emptyField(field: "translation (Chinese character)")
+        }
+        
         if !characters.containsChineseCharacters {
             throw MandarinValidationError.invalidCharacters(word: characters)
         }
+        
         try MandarinWordAddData.validations().run(on: self)
     }
     
